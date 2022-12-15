@@ -18,11 +18,19 @@ class PokeStats:
         pokemon=req.get(f'https://pokeapi.co/api/v2/pokemon/?limit=1000&offset=20')
         at_json = pokemon.json()
         print(*(y for x in at_json['results'] for z,y in x.items() if z == 'name'),sep=',')
+    def create_list_of_pokemans(self):
+        pokemon=req.get(f'https://pokeapi.co/api/v2/pokemon/?limit=10000&offset=20')
+        at_json = pokemon.json()
+        list_of_pokemans =[y for x in at_json['results'] for z,y in x.items() if z == 'name']
+        for x in list_of_pokemans:
+            pokemon=req.get(f'https://pokeapi.co/api/v2/pokemon/{x}/')
+            at_json = pokemon.json()
+            print(f"{x.capitalize()} weighs {at_json['weight']} poop units and is {at_json['height']} poopies tall")
+        pass
+    def list_of_weight_and_height_loop(self):
+        pass
+        
         #print(*(y for x in at_json['results'] for z,y in x.items() if z == 'name'),sep=',')
 charizard = PokeStats('charizard')
-#clefairy = PokeStats('clefairy')
-#charizard.get_Moves('double-slap')
-#charizard.try_twnty()
-#charizard.get_pokemon_name_lol()
-charizard.who_can_learn()
+charizard.create_list_of_pokemans()
 
